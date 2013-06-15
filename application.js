@@ -6,27 +6,38 @@ $(document).ready(function() {
     // elements
 
     // ADD
-    $('').on('click', function() {
-      addTodo()
+    $('.add').on('click', function() {
+      todoName = $('.toolbox .todo').val();
+      todoList = $('.todo_list');
+      addTodo(todoName, todoList);
     })
 
     // REMOVE
-    $('').on('click', function() {
-      removeTodo()
-    })
+     $('.todo_list').on('click', '.delete', function() {
+       var target = $(this);
+       removeTodo(target);
+     })
 
     // COMPLETE
-    $('').on('click', function() {
-      completeTodo()
+    $('.todo_list').on('click', '.complete', function() {
+      var target = $(this);
+     completeTodo(target);
     })
-  }
+   }
 
   //Create functions to add, remove and complete todos
-  function addTodo() {}
+  function addTodo(todoName, todoList) {
+    html_snippet = buildTodo(todoName);
+    todoList.append(html_snippet);
+  }
 
-  function removeTodo() {}
+  function removeTodo(target) {
+    target.closest('.todo').remove();
+  }
 
-  function completeTodo() {}
+   function completeTodo(target) {
+    target.closest('.todo').addClass('complete');
+  }
   
 
   function buildTodo(todoName) {
